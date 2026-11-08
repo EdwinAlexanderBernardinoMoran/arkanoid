@@ -1,7 +1,7 @@
 const input = {
-  debug: true, // log en consola; poner false al terminar de probar
+  debug: false, // log en consola
   keys: {},
-  mouse: { x: CONFIG.width / 2, y: 0 },
+  mouse: { x: CONFIG.width / 2, y: 0, moved: false, clicked: false }, // moved / clicked: true hasta que un consumidor los limpie
 };
 
 const INPUT_KEYS = new Set( [ 'ArrowLeft', 'ArrowRight', 'KeyA', 'KeyD', 'Space', 'KeyP', 'Escape' ] );
@@ -22,5 +22,11 @@ window.addEventListener( 'mousemove', ( e ) => {
   const rect = document.getElementById( 'game' ).getBoundingClientRect();
   input.mouse.x = ( e.clientX - rect.left ) * ( CONFIG.width / rect.width );
   input.mouse.y = ( e.clientY - rect.top ) * ( CONFIG.height / rect.height );
+  input.mouse.moved = true;
   if ( input.debug ) console.log( 'mouse', Math.round( input.mouse.x ), Math.round( input.mouse.y ) );
+} );
+
+window.addEventListener( 'mousedown', () => {
+  input.mouse.clicked = true;
+  if ( input.debug ) console.log( 'click' );
 } );

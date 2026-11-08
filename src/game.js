@@ -5,6 +5,7 @@ const state = {
   status: 'ready',
   paddle: createPaddle(),
   ball: createBall(),
+  blocks: createBlocks(),
 };
 
 function update() {
@@ -19,6 +20,7 @@ function update() {
   } else if ( state.status === 'playing' ) {
     updateBall( state.ball );
     bounceBallOnPaddle( state.ball, state.paddle );
+    collideBallBlocks( state.ball, state.blocks );
   }
 
   input.mouse.clicked = false;
@@ -27,6 +29,7 @@ function update() {
 function draw() {
   ctx.fillStyle = '#000';
   ctx.fillRect( 0, 0, canvas.width, canvas.height );
+  drawBlocks( ctx, state.blocks );
   drawPaddle( ctx, state.paddle );
   drawBall( ctx, state.ball );
 }

@@ -1,6 +1,7 @@
 const input = {
   debug: false, // log en consola
   keys: {},
+  pressed: {}, // true desde el keydown (sin repetición) hasta que un consumidor lo limpie
   mouse: { x: CONFIG.width / 2, y: 0, moved: false, clicked: false }, // moved / clicked: true hasta que un consumidor los limpie
 };
 
@@ -9,6 +10,7 @@ const INPUT_KEYS = new Set( [ 'ArrowLeft', 'ArrowRight', 'KeyA', 'KeyD', 'Space'
 window.addEventListener( 'keydown', ( e ) => {
   if ( !INPUT_KEYS.has( e.code ) ) return;
   e.preventDefault();
+  if ( !e.repeat ) input.pressed[ e.code ] = true;
   input.keys[ e.code ] = true;
   if ( input.debug ) console.log( 'keydown', e.code );
 } );

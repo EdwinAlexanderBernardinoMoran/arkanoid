@@ -34,6 +34,21 @@ function updateBall( ball ) {
   }
 }
 
+function bounceBallOnPaddle( ball, paddle ) {
+  const overlaps = ball.x + ball.size > paddle.x && ball.x < paddle.x + paddle.w &&
+    ball.y + ball.size > paddle.y && ball.y < paddle.y + paddle.h;
+  if ( ball.vy <= 0 || !overlaps ) return;
+
+  const ballCenter = ball.x + ball.size / 2;
+  const paddleCenter = paddle.x + paddle.w / 2;
+  const hit = Math.max( -1, Math.min( 1, ( ballCenter - paddleCenter ) / ( paddle.w / 2 ) ) );
+  const angle = hit * CONFIG.ball.maxBounceAngle * Math.PI / 180;
+
+  ball.vx = CONFIG.ball.speed * Math.sin( angle );
+  ball.vy = -CONFIG.ball.speed * Math.cos( angle );
+  ball.y = paddle.y - ball.size;
+}
+
 function drawBall( ctx, ball ) {
   drawSprite( ctx, 'ball', ball.x, ball.y, ball.size, ball.size );
 }

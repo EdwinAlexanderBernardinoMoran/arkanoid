@@ -18,6 +18,7 @@ function update() {
     }
   } else if ( state.status === 'playing' ) {
     updateBall( state.ball );
+    bounceBallOnPaddle( state.ball, state.paddle );
   }
 
   input.mouse.clicked = false;

@@ -1,6 +1,6 @@
 # SPEC 01 — MVP jugable de Arkanoid
 
-> **Estado:** Aprobado
+> **Estado:** Implementado
 > **Depende de:** ninguno
 > **Fecha:** 2026-11-08
 > **Objetivo:** Un Arkanoid de un nivel, jugable en el navegador con teclado o mouse, con vidas, puntaje, pausa y pantallas de Game Over y Victoria.
@@ -77,20 +77,20 @@ Convenciones:
 
 ## Criterios de aceptación
 
-- [ ] Abrir `index.html` en el navegador muestra el juego sin errores en consola.
-- [ ] El canvas mantiene la proporción 4:3 al redimensionar la ventana.
-- [ ] El paddle se mueve con ← →, con A D y con el mouse, y no sale del canvas.
-- [ ] La bola empieza pegada al paddle y se lanza con Espacio o clic.
-- [ ] La bola rebota en paredes laterales, techo y paddle.
-- [ ] Golpear el paddle en el borde izquierdo manda la bola hacia la izquierda; en el derecho, hacia la derecha.
-- [ ] La rapidez de la bola es la misma antes y después de cada rebote.
-- [ ] Hay 60 bloques en 6 filas de 10, con los colores de `CONFIG.rowColors`.
-- [ ] Un bloque golpeado desaparece y suma exactamente 10 puntos.
-- [ ] El HUD muestra puntaje y vidas actuales.
-- [ ] Si la bola cae bajo el canvas, las vidas bajan en 1 y la bola vuelve al paddle.
-- [ ] Con 0 vidas aparece Game Over; Espacio o clic reinicia con puntaje 0 y 3 vidas.
-- [ ] Al romper los 60 bloques aparece Victoria; Espacio o clic reinicia.
-- [ ] `P` o `Esc` pausa y reanuda; en pausa la bola y el paddle no se mueven.
+- ✅ Abrir `index.html` en el navegador muestra el juego sin errores en consola.
+- ✅ El canvas mantiene la proporción 4:3 al redimensionar la ventana.
+- ✅ El paddle se mueve con ← →, con A D y con el mouse, y no sale del canvas.
+- ✅ La bola empieza pegada al paddle y se lanza con Espacio o clic.
+- ✅ La bola rebota en paredes laterales, techo y paddle.
+- ✅ Golpear el paddle en el borde izquierdo manda la bola hacia la izquierda; en el derecho, hacia la derecha.
+- ✅ La rapidez de la bola es la misma antes y después de cada rebote.
+- ✅ Hay 60 bloques en 6 filas de 10, con los colores de `CONFIG.rowColors`.
+- ✅ Un bloque golpeado desaparece y suma exactamente 10 puntos.
+- ✅ El HUD muestra puntaje y vidas actuales.
+- ✅ Si la bola cae bajo el canvas, las vidas bajan en 1 y la bola vuelve al paddle.
+- ✅ Con 0 vidas aparece Game Over; Espacio o clic reinicia con puntaje 0 y 3 vidas.
+- ✅ Al romper los 60 bloques aparece Victoria; Espacio o clic reinicia.
+- ✅ `P` o `Esc` pausa y reanuda; en pausa la bola y el paddle no se mueven.
 
 ## Decisiones
 

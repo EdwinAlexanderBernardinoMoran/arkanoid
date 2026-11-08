@@ -1,6 +1,6 @@
 # SPEC 01 — MVP jugable de Arkanoid
 
-> **Estado:** Borrador
+> **Estado:** Aprobado
 > **Depende de:** ninguno
 > **Fecha:** 2026-11-08
 > **Objetivo:** Un Arkanoid de un nivel, jugable en el navegador con teclado o mouse, con vidas, puntaje, pausa y pantallas de Game Over y Victoria.
@@ -36,22 +36,24 @@
 const CONFIG = {
   width: 800,
   height: 600,
-  paddle: { w: 128, h: 14, y: 560, speed: 8 },   // px/frame
+  paddle: { w: 128, h: 14, y: 560, speed: 8 }, // px/frame
   ball: { size: 16, speed: 6, maxBounceAngle: 60 }, // grados desde la vertical
   blocks: { rows: 6, cols: 10, w: 64, h: 32, offsetX: 80, offsetY: 80 },
-  rowColors: [ 'red', 'yellow', 'cyan', 'magenta', 'hotpink', 'green' ],
+  rowColors: ["red", "yellow", "cyan", "magenta", "hotpink", "green"],
   lives: 3,
   pointsPerBlock: 10,
 };
 
 // Estado del juego (src/game.js)
 const state = {
-  status: 'ready', // 'ready' | 'playing' | 'paused' | 'gameover' | 'won'
+  status: "ready", // 'ready' | 'playing' | 'paused' | 'gameover' | 'won'
   score: 0,
   lives: 3,
   paddle: { x: 0, y: 0, w: 0, h: 0 },
   ball: { x: 0, y: 0, vx: 0, vy: 0, size: 16 },
-  blocks: [ /* { x, y, w, h, color, alive } */ ],
+  blocks: [
+    /* { x, y, w, h, color, alive } */
+  ],
 };
 ```
 
@@ -105,12 +107,12 @@ Convenciones:
 
 ## Riesgos
 
-| Riesgo | Mitigación |
-| --- | --- |
-| Bola atraviesa bloques o paddle a alta velocidad (tunneling) | Velocidad 6 px/frame con bola de 16 px; no hace falta subdivisión en el MVP. |
-| Velocidad depende de la tasa de refresco del monitor | Documentado: el MVP asume 60 Hz. Delta time queda para otro spec. |
-| Mouse con canvas escalado da coordenadas erróneas | Convertir con `getBoundingClientRect()` y la razón `width / rect.width`. |
-| Spritesheet no carga | `drawSprite` no dibuja nada; el juego arranca solo desde el callback de `loadSpritesheet`. |
+| Riesgo                                                       | Mitigación                                                                                 |
+| ------------------------------------------------------------ | ------------------------------------------------------------------------------------------ |
+| Bola atraviesa bloques o paddle a alta velocidad (tunneling) | Velocidad 6 px/frame con bola de 16 px; no hace falta subdivisión en el MVP.               |
+| Velocidad depende de la tasa de refresco del monitor         | Documentado: el MVP asume 60 Hz. Delta time queda para otro spec.                          |
+| Mouse con canvas escalado da coordenadas erróneas            | Convertir con `getBoundingClientRect()` y la razón `width / rect.width`.                   |
+| Spritesheet no carga                                         | `drawSprite` no dibuja nada; el juego arranca solo desde el callback de `loadSpritesheet`. |
 
 ## Qué **no** entra en este spec
 

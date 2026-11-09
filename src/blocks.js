@@ -35,6 +35,7 @@ function collideBallBlocks( ball, blocks ) {
     block.alive = false;
     block.exploding = true;
     block.explodeTick = 0;
+    playSound( 'break' );
     return block;
   }
 

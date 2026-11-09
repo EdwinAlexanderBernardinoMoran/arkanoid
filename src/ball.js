@@ -50,6 +50,7 @@ function bounceBallOnPaddle( ball, paddle ) {
   ball.vx = CONFIG.ball.speed * Math.sin( angle );
   ball.vy = -CONFIG.ball.speed * Math.cos( angle );
   ball.y = paddle.y - ball.size;
+  playSound( 'bounce' );
 }
 
 function drawBall( ctx, ball ) {

@@ -60,18 +60,18 @@ Convenciones:
 
 ## Criterios de aceptación
 
-- [ ] Abrir `index.html` no produce errores en consola (ni con el sonido bloqueado por el navegador).
-- [ ] Al rebotar en la pared izquierda suena `ball-bounce.mp3`.
-- [ ] Al rebotar en la pared derecha suena `ball-bounce.mp3`.
-- [ ] Al rebotar en el techo suena `ball-bounce.mp3`.
-- [ ] Al rebotar en el paddle suena `ball-bounce.mp3`.
-- [ ] Al golpear un bloque suena `break-sound.mp3` exactamente una vez y no suena `ball-bounce.mp3`.
-- [ ] La bola atravesando una explosión (SPEC 02) no produce ningún sonido.
-- [ ] Al caer la bola bajo el canvas no suena nada.
-- [ ] En pausa, Game Over y Victoria no se reproduce ningún sonido.
-- [ ] Rebotes seguidos muy rápidos reinician el sonido sin errores en consola.
-- [ ] `assets/spritesheet.js` y los archivos de `assets/sounds/` quedan sin cambios.
-- [ ] Los criterios de aceptación de los SPEC 01 y 02 siguen cumpliéndose.
+- [x] Abrir `index.html` no produce errores en consola (ni con el sonido bloqueado por el navegador).
+- [x] Al rebotar en la pared izquierda suena `ball-bounce.mp3`.
+- [x] Al rebotar en la pared derecha suena `ball-bounce.mp3`.
+- [x] Al rebotar en el techo suena `ball-bounce.mp3`.
+- [x] Al rebotar en el paddle suena `ball-bounce.mp3`.
+- [x] Al golpear un bloque suena `break-sound.mp3` exactamente una vez y no suena `ball-bounce.mp3`.
+- [x] La bola atravesando una explosión (SPEC 02) no produce ningún sonido.
+- [x] Al caer la bola bajo el canvas no suena nada.
+- [x] En pausa, Game Over y Victoria no se reproduce ningún sonido.
+- [x] Rebotes seguidos muy rápidos reinician el sonido sin errores en consola.
+- [x] `assets/spritesheet.js` y los archivos de `assets/sounds/` quedan sin cambios.
+- [x] Los criterios de aceptación de los SPEC 01 y 02 siguen cumpliéndose.
 
 ## Decisiones
 

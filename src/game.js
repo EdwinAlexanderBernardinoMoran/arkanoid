@@ -46,7 +46,7 @@ function update() {
         bounceBallOnPaddle( state.ball, state.paddle );
         if ( collideBallBlocks( state.ball, state.blocks ) ) state.score += CONFIG.pointsPerBlock;
 
-        if ( state.blocks.every( ( b ) => !b.alive ) ) {
+        if ( state.blocks.every( ( b ) => !b.alive && !b.exploding ) ) {
           state.status = 'won';
         } else if ( state.ball.y > CONFIG.height ) {
           state.lives--;

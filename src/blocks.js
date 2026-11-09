@@ -41,6 +41,15 @@ function collideBallBlocks( ball, blocks ) {
   return null;
 }
 
+function updateBlocks( blocks ) {
+  for ( const block of blocks ) {
+    if ( !block.exploding ) continue;
+
+    block.explodeTick++;
+    if ( block.explodeTick >= CONFIG.blocks.explosionTicks ) block.exploding = false;
+  }
+}
+
 function drawBlocks( ctx, blocks ) {
   for ( const block of blocks ) {
     if ( !block.alive ) continue;

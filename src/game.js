@@ -32,6 +32,7 @@ function update() {
 
     if ( state.status === 'ready' ) {
       stickBall( state.ball, state.paddle );
+      updateBlocks( state.blocks );
       if ( confirm ) {
         launchBall( state.ball );
         state.status = 'playing';
@@ -40,6 +41,7 @@ function update() {
       if ( pause ) {
         state.status = 'paused';
       } else {
+        updateBlocks( state.blocks );
         updateBall( state.ball );
         bounceBallOnPaddle( state.ball, state.paddle );
         if ( collideBallBlocks( state.ball, state.blocks ) ) state.score += CONFIG.pointsPerBlock;

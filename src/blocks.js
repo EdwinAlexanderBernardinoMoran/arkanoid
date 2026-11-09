@@ -11,6 +11,8 @@ function createBlocks() {
         h,
         color: CONFIG.rowColors[ r ],
         alive: true,
+        exploding: false,
+        explodeTick: 0,
       } );
     }
   }
@@ -31,15 +33,30 @@ function collideBallBlocks( ball, blocks ) {
     else ball.vy = -ball.vy;
 
     block.alive = false;
+    block.exploding = true;
+    block.explodeTick = 0;
     return block;
   }
 
   return null;
 }
 
+function updateBlocks( blocks ) {
+  for ( const block of blocks ) {
+    if ( !block.exploding ) continue;
+
+    block.explodeTick++;
+    if ( block.explodeTick >= CONFIG.blocks.explosionTicks ) block.exploding = false;
+  }
+}
+
 function drawBlocks( ctx, blocks ) {
   for ( const block of blocks ) {
-    if ( !block.alive ) continue;
-    drawSprite( ctx, 'block_' + block.color, block.x, block.y, block.w, block.h );
+    if ( block.alive ) {
+      drawSprite( ctx, 'block_' + block.color, block.x, block.y, block.w, block.h );
+    } else if ( block.exploding ) {
+      const i = Math.min( 3, Math.floor( block.explodeTick * 4 / CONFIG.blocks.explosionTicks ) );
+      drawFrame( ctx, EXPLOSION_FRAMES[ block.color ][ i ], block.x, block.y, block.w, block.h );
+    }
   }
 }

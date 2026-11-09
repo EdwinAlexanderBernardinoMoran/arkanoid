@@ -24,38 +24,61 @@ function update() {
   const pause = input.pressed.KeyP || input.pressed.Escape;
 
   if ( state.status === 'gameover' || state.status === 'won' ) {
-    if ( confirm ) resetGame();
+    updateFinishedGame( confirm );
   } else if ( state.status === 'paused' ) {
-    if ( pause ) state.status = 'playing';
+    updatePausedGame( pause );
   } else {
-    updatePaddle( state.paddle );
-
-    if ( state.status === 'ready' ) {
-      stickBall( state.ball, state.paddle );
-      if ( confirm ) {
-        launchBall( state.ball );
-        state.status = 'playing';
-      }
-    } else if ( state.status === 'playing' ) {
-      if ( pause ) {
-        state.status = 'paused';
-      } else {
-        updateBall( state.ball );
-        bounceBallOnPaddle( state.ball, state.paddle );
-        if ( collideBallBlocks( state.ball, state.blocks ) ) state.score += CONFIG.pointsPerBlock;
-
-        if ( state.blocks.every( ( b ) => !b.alive ) ) {
-          state.status = 'won';
-        } else if ( state.ball.y > CONFIG.height ) {
-          state.lives--;
-          state.status = state.lives > 0 ? 'ready' : 'gameover';
-        }
-      }
-    }
+    updateActiveGame( confirm, pause );
   }
 
   input.pressed = {};
   input.mouse.clicked = false;
+}
+
+function updateFinishedGame( confirm ) {
+  if ( confirm ) resetGame();
+}
+
+function updatePausedGame( pause ) {
+  if ( pause ) state.status = 'playing';
+}
+
+function updateActiveGame( confirm, pause ) {
+  updatePaddle( state.paddle );
+
+  if ( state.status === 'ready' ) {
+    updateReadyGame( confirm );
+  } else if ( state.status === 'playing' ) {
+    updatePlayingGame( pause );
+  }
+}
+
+function updateReadyGame( confirm ) {
+  stickBall( state.ball, state.paddle );
+  updateBlocks( state.blocks );
+  if ( confirm ) {
+    launchBall( state.ball );
+    state.status = 'playing';
+  }
+}
+
+function updatePlayingGame( pause ) {
+  if ( pause ) {
+    state.status = 'paused';
+    return;
+  }
+
+  updateBlocks( state.blocks );
+  updateBall( state.ball );
+  bounceBallOnPaddle( state.ball, state.paddle );
+  if ( collideBallBlocks( state.ball, state.blocks ) ) state.score += CONFIG.pointsPerBlock;
+
+  if ( state.blocks.every( ( b ) => !b.alive && !b.exploding ) ) {
+    state.status = 'won';
+  } else if ( state.ball.y > CONFIG.height ) {
+    state.lives--;
+    state.status = state.lives > 0 ? 'ready' : 'gameover';
+  }
 }
 
 function drawHud() {

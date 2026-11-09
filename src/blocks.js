@@ -52,7 +52,11 @@ function updateBlocks( blocks ) {
 
 function drawBlocks( ctx, blocks ) {
   for ( const block of blocks ) {
-    if ( !block.alive ) continue;
-    drawSprite( ctx, 'block_' + block.color, block.x, block.y, block.w, block.h );
+    if ( block.alive ) {
+      drawSprite( ctx, 'block_' + block.color, block.x, block.y, block.w, block.h );
+    } else if ( block.exploding ) {
+      const i = Math.min( 3, Math.floor( block.explodeTick * 4 / CONFIG.blocks.explosionTicks ) );
+      drawFrame( ctx, EXPLOSION_FRAMES[ block.color ][ i ], block.x, block.y, block.w, block.h );
+    }
   }
 }

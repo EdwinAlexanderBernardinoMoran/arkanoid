@@ -11,6 +11,8 @@ function createBlocks() {
         h,
         color: CONFIG.rowColors[ r ],
         alive: true,
+        exploding: false,
+        explodeTick: 0,
       } );
     }
   }

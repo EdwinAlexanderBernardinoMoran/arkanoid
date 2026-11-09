@@ -59,17 +59,17 @@ Convenciones:
 
 ## Criterios de aceptación
 
-- [ ] Abrir `index.html` no produce errores en consola.
-- [ ] Un bloque golpeado muestra 4 frames de explosión distintos, en orden, antes de desaparecer.
-- [ ] La explosión usa los frames de `EXPLOSION_FRAMES[ block.color ]` (`red`, `yellow`, `cyan`, `magenta`, `hotpink`, `green`) y `assets/spritesheet.js` queda sin cambios.
-- [ ] La animación dura 9 frames del loop (`CONFIG.blocks.explosionTicks`), unos 150 ms a 60 Hz.
-- [ ] La explosión ocupa exactamente la posición y el tamaño del bloque (64x32).
-- [ ] El golpe suma exactamente 10 puntos, una sola vez por bloque.
-- [ ] La bola rebota una sola vez al golpear un bloque y atraviesa la explosión sin rebotar de nuevo.
-- [ ] Con `P` o `Esc` la explosión se congela y continúa al reanudar.
-- [ ] Tras romper el último bloque, la pantalla de Victoria aparece solo cuando termina su explosión.
-- [ ] Al reiniciar tras Game Over o Victoria no queda ninguna explosión en pantalla y hay 60 bloques vivos.
-- [ ] Los criterios de aceptación del SPEC 01 siguen cumpliéndose.
+- [x] Abrir `index.html` no produce errores en consola.
+- [x] Un bloque golpeado muestra 4 frames de explosión distintos, en orden, antes de desaparecer.
+- [x] La explosión usa los frames de `EXPLOSION_FRAMES[ block.color ]` (`red`, `yellow`, `cyan`, `magenta`, `hotpink`, `green`) y `assets/spritesheet.js` queda sin cambios.
+- [x] La animación dura 9 frames del loop (`CONFIG.blocks.explosionTicks`), unos 150 ms a 60 Hz.
+- [x] La explosión ocupa exactamente la posición y el tamaño del bloque (64x32).
+- [x] El golpe suma exactamente 10 puntos, una sola vez por bloque.
+- [x] La bola rebota una sola vez al golpear un bloque y atraviesa la explosión sin rebotar de nuevo.
+- [x] Con `P` o `Esc` la explosión se congela y continúa al reanudar.
+- [x] Tras romper el último bloque, la pantalla de Victoria aparece solo cuando termina su explosión.
+- [x] Al reiniciar tras Game Over o Victoria no queda ninguna explosión en pantalla y hay 60 bloques vivos.
+- [x] Los criterios de aceptación del SPEC 01 siguen cumpliéndose.
 
 ## Decisiones
 

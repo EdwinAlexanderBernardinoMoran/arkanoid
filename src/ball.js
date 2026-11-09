@@ -23,14 +23,17 @@ function updateBall( ball ) {
   if ( ball.x < 0 ) {
     ball.x = 0;
     ball.vx = -ball.vx;
+    playSound( 'bounce' );
   } else if ( ball.x + ball.size > CONFIG.width ) {
     ball.x = CONFIG.width - ball.size;
     ball.vx = -ball.vx;
+    playSound( 'bounce' );
   }
 
   if ( ball.y < 0 ) {
     ball.y = 0;
     ball.vy = -ball.vy;
+    playSound( 'bounce' );
   }
 }
 

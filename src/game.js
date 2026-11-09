@@ -64,8 +64,15 @@ function drawHud() {
   ctx.textBaseline = 'top';
   ctx.textAlign = 'left';
   ctx.fillText( 'Puntaje: ' + state.score, 16, 16 );
+  const size = CONFIG.ball.size;
+  const gap = 6;
+  const livesWidth = state.lives * size + Math.max( state.lives - 1, 0 ) * gap;
+  const livesX = CONFIG.width - 16 - livesWidth;
   ctx.textAlign = 'right';
-  ctx.fillText( 'Vidas: ' + state.lives, CONFIG.width - 16, 16 );
+  ctx.fillText( 'Vidas:', livesX - 10, 16 );
+  for ( let i = 0; i < state.lives; i++ ) {
+    drawSprite( ctx, 'ball', livesX + i * ( size + gap ), 16 + 3, size, size );
+  }
 }
 
 function drawOverlay( title, subtitle ) {
@@ -83,7 +90,7 @@ function drawOverlay( title, subtitle ) {
 }
 
 function draw() {
-  ctx.fillStyle = '#000';
+  ctx.fillStyle = '#222';
   ctx.fillRect( 0, 0, canvas.width, canvas.height );
   drawBlocks( ctx, state.blocks );
   drawPaddle( ctx, state.paddle );

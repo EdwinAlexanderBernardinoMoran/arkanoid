@@ -33,6 +33,8 @@ function collideBallBlocks( ball, blocks ) {
     else ball.vy = -ball.vy;
 
     block.alive = false;
+    block.exploding = true;
+    block.explodeTick = 0;
     return block;
   }
 

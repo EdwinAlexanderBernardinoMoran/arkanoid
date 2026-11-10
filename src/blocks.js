@@ -1,16 +1,22 @@
-function createBlocks() {
-  const { rows, cols, w, h, offsetX, offsetY } = CONFIG.blocks;
+function createBlocks( level ) {
+  const { cols, w, h, offsetX, offsetY } = CONFIG.blocks;
+  const rows = LEVELS[ level - 1 ].rows;
   const blocks = [];
 
-  for ( let r = 0; r < rows; r++ ) {
+  for ( let r = 0; r < rows.length; r++ ) {
     for ( let c = 0; c < cols; c++ ) {
+      const color = LEVEL_COLORS[ rows[ r ][ c ] ];
+      if ( !color ) continue;
+
       blocks.push( {
         x: offsetX + c * w,
         y: offsetY + r * h,
         w,
         h,
-        color: CONFIG.rowColors[ r ],
+        color,
         alive: true,
+        exploding: false,
+        explodeTick: 0,
       } );
     }
   }
@@ -31,15 +37,31 @@ function collideBallBlocks( ball, blocks ) {
     else ball.vy = -ball.vy;
 
     block.alive = false;
+    block.exploding = true;
+    block.explodeTick = 0;
+    playSound( 'break' );
     return block;
   }
 
   return null;
 }
 
+function updateBlocks( blocks ) {
+  for ( const block of blocks ) {
+    if ( !block.exploding ) continue;
+
+    block.explodeTick++;
+    if ( block.explodeTick >= CONFIG.blocks.explosionTicks ) block.exploding = false;
+  }
+}
+
 function drawBlocks( ctx, blocks ) {
   for ( const block of blocks ) {
-    if ( !block.alive ) continue;
-    drawSprite( ctx, 'block_' + block.color, block.x, block.y, block.w, block.h );
+    if ( block.alive ) {
+      drawSprite( ctx, 'block_' + block.color, block.x, block.y, block.w, block.h );
+    } else if ( block.exploding ) {
+      const i = Math.min( 3, Math.floor( block.explodeTick * 4 / CONFIG.blocks.explosionTicks ) );
+      drawFrame( ctx, EXPLOSION_FRAMES[ block.color ][ i ], block.x, block.y, block.w, block.h );
+    }
   }
 }

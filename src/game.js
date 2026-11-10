@@ -3,20 +3,26 @@ const ctx = canvas.getContext( '2d' );
 
 const state = {
   status: 'ready',
+  level: 1,
   score: 0,
   lives: CONFIG.lives,
-  paddle: createPaddle(),
-  ball: createBall(),
-  blocks: createBlocks(),
+  paddle: createPaddle( 1 ),
+  ball: createBall( 1 ),
+  blocks: createBlocks( 1 ),
 };
 
-function resetGame() {
+function loadLevel( n ) {
+  state.level = n;
+  state.paddle = createPaddle( n );
+  state.ball = createBall( n );
+  state.blocks = createBlocks( n );
   state.status = 'ready';
+}
+
+function resetGame() {
   state.score = 0;
   state.lives = CONFIG.lives;
-  state.paddle = createPaddle();
-  state.ball = createBall();
-  state.blocks = createBlocks();
+  loadLevel( 1 );
 }
 
 function update() {
@@ -24,38 +30,67 @@ function update() {
   const pause = input.pressed.KeyP || input.pressed.Escape;
 
   if ( state.status === 'gameover' || state.status === 'won' ) {
-    if ( confirm ) resetGame();
+    updateFinishedGame( confirm );
+  } else if ( state.status === 'levelcomplete' ) {
+    updateLevelComplete( confirm );
   } else if ( state.status === 'paused' ) {
-    if ( pause ) state.status = 'playing';
+    updatePausedGame( pause );
   } else {
-    updatePaddle( state.paddle );
-
-    if ( state.status === 'ready' ) {
-      stickBall( state.ball, state.paddle );
-      if ( confirm ) {
-        launchBall( state.ball );
-        state.status = 'playing';
-      }
-    } else if ( state.status === 'playing' ) {
-      if ( pause ) {
-        state.status = 'paused';
-      } else {
-        updateBall( state.ball );
-        bounceBallOnPaddle( state.ball, state.paddle );
-        if ( collideBallBlocks( state.ball, state.blocks ) ) state.score += CONFIG.pointsPerBlock;
-
-        if ( state.blocks.every( ( b ) => !b.alive ) ) {
-          state.status = 'won';
-        } else if ( state.ball.y > CONFIG.height ) {
-          state.lives--;
-          state.status = state.lives > 0 ? 'ready' : 'gameover';
-        }
-      }
-    }
+    updateActiveGame( confirm, pause );
   }
 
   input.pressed = {};
   input.mouse.clicked = false;
+}
+
+function updateFinishedGame( confirm ) {
+  if ( confirm ) resetGame();
+}
+
+function updateLevelComplete( confirm ) {
+  if ( confirm ) loadLevel( state.level + 1 );
+}
+
+function updatePausedGame( pause ) {
+  if ( pause ) state.status = 'playing';
+}
+
+function updateActiveGame( confirm, pause ) {
+  updatePaddle( state.paddle );
+
+  if ( state.status === 'ready' ) {
+    updateReadyGame( confirm );
+  } else if ( state.status === 'playing' ) {
+    updatePlayingGame( pause );
+  }
+}
+
+function updateReadyGame( confirm ) {
+  stickBall( state.ball, state.paddle );
+  updateBlocks( state.blocks );
+  if ( confirm ) {
+    launchBall( state.ball );
+    state.status = 'playing';
+  }
+}
+
+function updatePlayingGame( pause ) {
+  if ( pause ) {
+    state.status = 'paused';
+    return;
+  }
+
+  updateBlocks( state.blocks );
+  updateBall( state.ball );
+  bounceBallOnPaddle( state.ball, state.paddle );
+  if ( collideBallBlocks( state.ball, state.blocks ) ) state.score += CONFIG.pointsPerBlock;
+
+  if ( state.blocks.every( ( b ) => !b.alive && !b.exploding ) ) {
+    state.status = state.level < LEVELS.length ? 'levelcomplete' : 'won';
+  } else if ( state.ball.y > CONFIG.height ) {
+    state.lives--;
+    state.status = state.lives > 0 ? 'ready' : 'gameover';
+  }
 }
 
 function drawHud() {
@@ -64,6 +99,8 @@ function drawHud() {
   ctx.textBaseline = 'top';
   ctx.textAlign = 'left';
   ctx.fillText( 'Puntaje: ' + state.score, 16, 16 );
+  ctx.textAlign = 'center';
+  ctx.fillText( 'Nivel ' + state.level, CONFIG.width / 2, 16 );
   const size = CONFIG.ball.size;
   const gap = 6;
   const livesWidth = state.lives * size + Math.max( state.lives - 1, 0 ) * gap;
@@ -98,6 +135,7 @@ function draw() {
   drawHud();
 
   if ( state.status === 'paused' ) drawOverlay( 'PAUSA', 'P o Esc para continuar' );
+  else if ( state.status === 'levelcomplete' ) drawOverlay( 'NIVEL COMPLETADO', 'Espacio o clic para continuar' );
   else if ( state.status === 'gameover' ) drawOverlay( 'GAME OVER', 'Espacio o clic para reiniciar' );
   else if ( state.status === 'won' ) drawOverlay( 'VICTORIA', 'Espacio o clic para reiniciar' );
 }

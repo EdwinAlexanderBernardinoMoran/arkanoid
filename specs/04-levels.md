@@ -1,6 +1,6 @@
 # SPEC 04 — Niveles con diseños, velocidad y paddle progresivos
 
-> **Estado:** Aprovado
+> **Estado:** Implementado
 > **Depende de:** SPEC 01, SPEC 02
 > **Fecha:** 2026-11-10
 > **Objetivo:** Añadir 5 niveles definidos como datos, cada uno con su diseño de bloques, bola más rápida y paddle más pequeño, con pantalla "Nivel completado" entre niveles y Victoria al terminar el quinto.

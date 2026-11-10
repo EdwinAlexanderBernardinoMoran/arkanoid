@@ -91,22 +91,22 @@ Convenciones:
 
 ## Criterios de aceptación
 
-- [ ] Abrir `index.html` muestra el nivel 1 sin errores en consola.
-- [ ] `LEVELS.length === 5` y cada fila de cada nivel mide exactamente 10 caracteres.
-- [ ] Cada uno de los 5 niveles tiene un diseño de bloques distinto y al menos un bloque.
-- [ ] El HUD muestra `Nivel N` con el nivel actual.
-- [ ] La velocidad de la bola es 6, 6.5, 7, 7.5 y 8 px/frame en los niveles 1 a 5, y es constante antes y después de cada rebote.
-- [ ] El ancho del paddle es 128, 112, 96, 80 y 64 px en los niveles 1 a 5.
-- [ ] Al romper el último bloque del nivel 1 (y terminar su explosión) aparece `NIVEL COMPLETADO`; no aparece antes de que termine la explosión.
-- [ ] En `NIVEL COMPLETADO` la bola y el paddle no se mueven.
-- [ ] Espacio o clic en `NIVEL COMPLETADO` carga el nivel siguiente con la bola pegada al paddle.
-- [ ] Al pasar de nivel, puntaje y vidas se conservan.
-- [ ] Perder una vida repite el mismo nivel y los bloques ya rotos siguen rotos.
-- [ ] Completar el nivel 5 muestra `VICTORIA`, no `NIVEL COMPLETADO`.
-- [ ] Game Over y Victoria reinician en nivel 1, con puntaje 0 y 3 vidas.
-- [ ] Pausa con `P` o `Esc` sigue funcionando en todos los niveles.
-- [ ] `assets/spritesheet.js` y `assets/sounds/` quedan sin cambios.
-- [ ] Los criterios de aceptación de los SPEC 01, 02 y 03 siguen cumpliéndose.
+- [x] Abrir `index.html` muestra el nivel 1 sin errores en consola.
+- [x] `LEVELS.length === 5` y cada fila de cada nivel mide exactamente 10 caracteres.
+- [x] Cada uno de los 5 niveles tiene un diseño de bloques distinto y al menos un bloque.
+- [x] El HUD muestra `Nivel N` con el nivel actual.
+- [x] La velocidad de la bola es 6, 6.5, 7, 7.5 y 8 px/frame en los niveles 1 a 5, y es constante antes y después de cada rebote.
+- [x] El ancho del paddle es 128, 112, 96, 80 y 64 px en los niveles 1 a 5.
+- [x] Al romper el último bloque del nivel 1 (y terminar su explosión) aparece `NIVEL COMPLETADO`; no aparece antes de que termine la explosión.
+- [x] En `NIVEL COMPLETADO` la bola y el paddle no se mueven.
+- [x] Espacio o clic en `NIVEL COMPLETADO` carga el nivel siguiente con la bola pegada al paddle.
+- [x] Al pasar de nivel, puntaje y vidas se conservan.
+- [x] Perder una vida repite el mismo nivel y los bloques ya rotos siguen rotos.
+- [x] Completar el nivel 5 muestra `VICTORIA`, no `NIVEL COMPLETADO`.
+- [x] Game Over y Victoria reinician en nivel 1, con puntaje 0 y 3 vidas.
+- [x] Pausa con `P` o `Esc` sigue funcionando en todos los niveles.
+- [x] `assets/spritesheet.js` y `assets/sounds/` quedan sin cambios.
+- [x] Los criterios de aceptación de los SPEC 01, 02 y 03 siguen cumpliéndose.
 
 ## Decisiones
 

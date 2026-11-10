@@ -31,6 +31,8 @@ function update() {
 
   if ( state.status === 'gameover' || state.status === 'won' ) {
     updateFinishedGame( confirm );
+  } else if ( state.status === 'levelcomplete' ) {
+    updateLevelComplete( confirm );
   } else if ( state.status === 'paused' ) {
     updatePausedGame( pause );
   } else {
@@ -43,6 +45,10 @@ function update() {
 
 function updateFinishedGame( confirm ) {
   if ( confirm ) resetGame();
+}
+
+function updateLevelComplete( confirm ) {
+  if ( confirm ) loadLevel( state.level + 1 );
 }
 
 function updatePausedGame( pause ) {
@@ -80,7 +86,7 @@ function updatePlayingGame( pause ) {
   if ( collideBallBlocks( state.ball, state.blocks ) ) state.score += CONFIG.pointsPerBlock;
 
   if ( state.blocks.every( ( b ) => !b.alive && !b.exploding ) ) {
-    state.status = 'won';
+    state.status = state.level < LEVELS.length ? 'levelcomplete' : 'won';
   } else if ( state.ball.y > CONFIG.height ) {
     state.lives--;
     state.status = state.lives > 0 ? 'ready' : 'gameover';
@@ -93,6 +99,8 @@ function drawHud() {
   ctx.textBaseline = 'top';
   ctx.textAlign = 'left';
   ctx.fillText( 'Puntaje: ' + state.score, 16, 16 );
+  ctx.textAlign = 'center';
+  ctx.fillText( 'Nivel ' + state.level, CONFIG.width / 2, 16 );
   const size = CONFIG.ball.size;
   const gap = 6;
   const livesWidth = state.lives * size + Math.max( state.lives - 1, 0 ) * gap;
@@ -127,6 +135,7 @@ function draw() {
   drawHud();
 
   if ( state.status === 'paused' ) drawOverlay( 'PAUSA', 'P o Esc para continuar' );
+  else if ( state.status === 'levelcomplete' ) drawOverlay( 'NIVEL COMPLETADO', 'Espacio o clic para continuar' );
   else if ( state.status === 'gameover' ) drawOverlay( 'GAME OVER', 'Espacio o clic para reiniciar' );
   else if ( state.status === 'won' ) drawOverlay( 'VICTORIA', 'Espacio o clic para reiniciar' );
 }

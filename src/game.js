@@ -6,19 +6,23 @@ const state = {
   level: 1,
   score: 0,
   lives: CONFIG.lives,
-  paddle: createPaddle(),
-  ball: createBall(),
+  paddle: createPaddle( 1 ),
+  ball: createBall( 1 ),
   blocks: createBlocks( 1 ),
 };
 
-function resetGame() {
+function loadLevel( n ) {
+  state.level = n;
+  state.paddle = createPaddle( n );
+  state.ball = createBall( n );
+  state.blocks = createBlocks( n );
   state.status = 'ready';
-  state.level = 1;
+}
+
+function resetGame() {
   state.score = 0;
   state.lives = CONFIG.lives;
-  state.paddle = createPaddle();
-  state.ball = createBall();
-  state.blocks = createBlocks( state.level );
+  loadLevel( 1 );
 }
 
 function update() {

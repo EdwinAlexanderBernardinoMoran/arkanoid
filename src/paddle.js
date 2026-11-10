@@ -1,5 +1,6 @@
-function createPaddle() {
-  const { w, h, y } = CONFIG.paddle;
+function createPaddle( level ) {
+  const { h, y } = CONFIG.paddle;
+  const w = CONFIG.paddle.w - ( level - 1 ) * CONFIG.levels.paddleStep;
   return { x: ( CONFIG.width - w ) / 2, y, w, h };
 }
 

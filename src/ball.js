@@ -1,5 +1,6 @@
-function createBall() {
-  return { x: 0, y: 0, vx: 0, vy: 0, size: CONFIG.ball.size };
+function createBall( level ) {
+  const speed = CONFIG.ball.speed + ( level - 1 ) * CONFIG.levels.speedStep;
+  return { x: 0, y: 0, vx: 0, vy: 0, size: CONFIG.ball.size, speed };
 }
 
 function stickBall( ball, paddle ) {
@@ -12,8 +13,8 @@ function stickBall( ball, paddle ) {
 function launchBall( ball ) {
   const angle = 30 * Math.PI / 180;
   const dir = Math.random() < 0.5 ? -1 : 1;
-  ball.vx = dir * CONFIG.ball.speed * Math.sin( angle );
-  ball.vy = -CONFIG.ball.speed * Math.cos( angle );
+  ball.vx = dir * ball.speed * Math.sin( angle );
+  ball.vy = -ball.speed * Math.cos( angle );
 }
 
 function updateBall( ball ) {
@@ -47,8 +48,8 @@ function bounceBallOnPaddle( ball, paddle ) {
   const hit = Math.max( -1, Math.min( 1, ( ballCenter - paddleCenter ) / ( paddle.w / 2 ) ) );
   const angle = hit * CONFIG.ball.maxBounceAngle * Math.PI / 180;
 
-  ball.vx = CONFIG.ball.speed * Math.sin( angle );
-  ball.vy = -CONFIG.ball.speed * Math.cos( angle );
+  ball.vx = ball.speed * Math.sin( angle );
+  ball.vy = -ball.speed * Math.cos( angle );
   ball.y = paddle.y - ball.size;
   playSound( 'bounce' );
 }

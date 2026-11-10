@@ -5,6 +5,7 @@ const CONFIG = {
   ball: { size: 16, speed: 6, maxBounceAngle: 60 }, // grados desde la vertical
   blocks: { rows: 6, cols: 10, w: 64, h: 32, offsetX: 80, offsetY: 80, explosionTicks: Math.round( EXPLOSION_DURATION / 1000 * 60 ) },
   rowColors: [ 'red', 'yellow', 'cyan', 'magenta', 'hotpink', 'green' ],
+  levels: { speedStep: 0.5, paddleStep: 16 }, // incremento por nivel (px/frame y px)
   lives: 3,
   pointsPerBlock: 10,
 };

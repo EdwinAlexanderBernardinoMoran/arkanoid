@@ -4,8 +4,7 @@ Este archivo proporciona guía a Claude Code (claude.ai/code) cuando trabaja con
 
 ## Proyecto
 
-Arkanoid: juego de bloques en HTML, CSS y JavaScript puros. Implementado hasta el SPEC 04 (MVP, animación de explosión, efectos de sonido, 5 niveles). Repo git, rama principal `main`. El `README.md` está desactualizado (dice que no está implementado).
-
+Arkanoid: juego de bloques en HTML, CSS y JavaScript puros. Implementado hasta el SPEC 04 (MVP, animación de explosión, efectos de sonido, 5 niveles). Repo git, rama principal `main`.
 ## Stack y estructura
 
 - HTML, CSS y JavaScript puros: sin frameworks, librerías, npm, bundler ni build.

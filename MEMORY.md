@@ -7,7 +7,7 @@ aporte.
 puntaje, pausa, animación de explosión, sonidos y 5 niveles.
 - Rama de trabajo: `spec-04-levels` (commits de niveles hechos; cambios sin commit en
 `CLAUDE.md` y en los specs 02, 03 y 04).
-- `README.md` desactualizado: todavía dice que el juego no está implementado.
+- `README.md` actualizado (cómo jugar, controles, estructura, niveles, flujo spec-driven); sin commit.
 - No hay `.gitignore`. No hay `node_modules`/`dist` porque no hay npm ni build.
 
 ## Decisiones (y por qué)
@@ -28,4 +28,4 @@ ya quedó desfasado).
 
 ## Próximos pasos
 - Commitear los cambios pendientes y hacer PR de `spec-04-levels` a `main`.
-- Actualizar `README.md`.
+- Mantener `README.md` al día cuando cambie el comportamiento o se agregue un spec.

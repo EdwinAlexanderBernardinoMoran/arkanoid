@@ -3,20 +3,22 @@ const ctx = canvas.getContext( '2d' );
 
 const state = {
   status: 'ready',
+  level: 1,
   score: 0,
   lives: CONFIG.lives,
   paddle: createPaddle(),
   ball: createBall(),
-  blocks: createBlocks(),
+  blocks: createBlocks( 1 ),
 };
 
 function resetGame() {
   state.status = 'ready';
+  state.level = 1;
   state.score = 0;
   state.lives = CONFIG.lives;
   state.paddle = createPaddle();
   state.ball = createBall();
-  state.blocks = createBlocks();
+  state.blocks = createBlocks( state.level );
 }
 
 function update() {
